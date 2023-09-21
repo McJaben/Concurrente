@@ -1,5 +1,5 @@
 package practico2Threads;
-
+// Ejercicio 5 (MiHilo en el enunciado, le cambié el)
 class UnHilo implements Runnable {
     String nombreHilo;
 

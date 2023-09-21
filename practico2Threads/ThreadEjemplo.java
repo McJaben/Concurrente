@@ -1,5 +1,5 @@
 package practico2Threads;
-
+//Ejercicio 3
 public class ThreadEjemplo extends Thread {
     public ThreadEjemplo(String str) {
         super(str);

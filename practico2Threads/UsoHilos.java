@@ -1,5 +1,5 @@
-package practico1Threads;
-
+package practico2Threads;
+// Ejercicio 5
 class UsoHilos {
     public static void main(String[] args) {
         System.out.println("Hilo principal iniciando.");

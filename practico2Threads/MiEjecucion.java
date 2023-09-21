@@ -1,5 +1,5 @@
 package practico2Threads;
-
+//Ejercicio2
 public class MiEjecucion extends Thread {
     public void run() {
         ir();

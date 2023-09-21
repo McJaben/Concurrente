@@ -1,5 +1,5 @@
 package practico2Threads;
-
+// Ejercicio 1
 public class Cliente extends Thread {
     public void run() {
         System.out.println("soy" + Thread.currentThread().getName());

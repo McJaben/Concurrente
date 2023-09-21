@@ -1,5 +1,5 @@
 package practico2Threads;
-
+// Ejercicio 1
 public class Recurso {
     static void uso() {
         Thread t = Thread.currentThread();

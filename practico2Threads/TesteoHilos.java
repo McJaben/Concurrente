@@ -1,5 +1,5 @@
 package practico2Threads;
-
+// Ejercicio 2
 class TesteoHilos {
     public static void main(String[] args) {
         Thread miHilo = new MiEjecucion();

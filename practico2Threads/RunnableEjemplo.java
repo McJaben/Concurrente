@@ -1,5 +1,5 @@
 package practico2Threads;
-
+// Ejercicio 4
 public class RunnableEjemplo implements Runnable {
 
     private String nombre;

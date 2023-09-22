@@ -1,3 +1,5 @@
+package practico1Excepciones;
+
 import javax.management.RuntimeErrorException;
 
 public class PruebaExcep{

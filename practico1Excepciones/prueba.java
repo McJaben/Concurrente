@@ -1,3 +1,4 @@
+package practico1Excepciones;
 import java.io.IOException;
 
 public class prueba {

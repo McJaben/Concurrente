@@ -1,6 +1,7 @@
 package practico3Concurrencia;
 
 class HiloB extends Thread {
+    // Es el ejercicio 7 del TP3
     private Impresor impresor;
     private int repeticiones;
 

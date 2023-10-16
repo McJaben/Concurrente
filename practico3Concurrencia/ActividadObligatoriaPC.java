@@ -1,6 +1,7 @@
 package practico3Concurrencia;
 
 public class ActividadObligatoriaPC {
+    // Es el ejercicio 7 del TP3
     public static void main(String[] args) {
         Impresor impresor = new Impresor();
 

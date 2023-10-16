@@ -3,6 +3,7 @@ package practico3Concurrencia;
 import java.util.concurrent.Semaphore;
 
 class Impresor {
+    // Es el ejercicio 7 del TP3
     private Semaphore semaforoA = new Semaphore(1);
     private Semaphore semaforoB = new Semaphore(0);
     private Semaphore semaforoC = new Semaphore(0);

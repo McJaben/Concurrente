@@ -13,9 +13,9 @@ public class MainEj4 {
         parque.agregarArea(area1);
         parque.agregarArea(area2);
 
-        Thread visitante1 = new Thread(new Visitante("Juan", "Zona A", parque, 2));
+        Thread visitante1 = new Thread(new Visitante("Juan", "Zona A", parque, 5));
         Thread visitante2 = new Thread(new Visitante("Maria", "Zona A", parque, 2));
-        Thread visitante3 = new Thread(new Visitante("Pedro", "Zona B", parque, 1));
+        Thread visitante3 = new Thread(new Visitante("Pedro", "Zona B", parque, 3));
         Thread visitante4 = new Thread(new Visitante("Fabio", "Zona B", parque, 4)); // no debería poder
 
         visitante1.start();

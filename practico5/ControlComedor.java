@@ -1,7 +1,5 @@
 package practico5;
 
-import practico3Concurrencia.Hamster2;
-
 public class ControlComedor {
     // Ejercicio 3 del TP5
     public static void main(String[] args) {
@@ -10,9 +8,10 @@ public class ControlComedor {
         Gato[] arrGatos = new Gato[6];
         String[] nombresPerros = { "Perro 1", "Perro 2", "Perro 3", "Perro 4", "Perro 5", "Perro 6", "Perro 7",
                 "Perro 8", "Perro 9" , "Perro 10"};
-        String[] nombresGatos = { "Gato 1", "Gato 2", "Gato 3", "Gato 4", "Gato 5", "Gato 6" };
+        String[] nombresGatos = { "Gato 1", "Gato 2", "Gato 3", "Gato 4", "Gato 5", "Gato 6", "Gato 7", "Gato 8",
+                "Gato 9", "Gato 10"};
         Thread[] arrayHilosPerros = new Thread[10];
-        Thread[] arrayHilosGatos = new Thread[6];
+        Thread[] arrayHilosGatos = new Thread[10];
         System.out.println("Creando los objetos...");
         for (int i = 0; i < arrPerros.length; i++) {
             // Inicializo los objetos Perro
@@ -37,7 +36,5 @@ public class ControlComedor {
         for (int l = 0; l < arrayHilosGatos.length; l++) {
            arrayHilosGatos[l].start();
         }
-        // while (true){
-        // }
     }
 }

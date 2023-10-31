@@ -12,7 +12,6 @@ public class Perro implements Runnable {
         System.out.println(Thread.currentThread().getName() + " está intentando comer.");
         try {
             comedor.comerPerros();
-            System.out.println(Thread.currentThread().getName() + " terminó de comer.");
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -135,7 +135,7 @@ public class Comedor {
         }
         modificacion.release();
 
-        // Verifico si no hay gatos ni perros esperando
+        // Verifico si no hay gatos ni perros esperando (xd)
         /*
          * if (perrosEsperando == 0) {
          * if (gatosEsperando == 0) {

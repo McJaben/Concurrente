@@ -10,6 +10,7 @@ public class Comedor {
     private Semaphore turnosPerros; // maneja cuándo es el turno de los perros
     private Semaphore turnosGatos; // maneja cuándo es el turno de los gatos
     private Semaphore modificacion; // mutex para contadores
+    private Semaphore waiting; // mutex para el esperando
     private int perrosComiendo; // cantidad de perros comiendo en ese momento
     private int gatosComiendo; // cantidad de gatos comiendo en ese momento
     private int perrosEsperando; // cantidad de perros esperando para comer
@@ -23,6 +24,7 @@ public class Comedor {
         turnosPerros = new Semaphore(0);
         turnosGatos = new Semaphore(0);
         modificacion = new Semaphore(1);
+        waiting = new Semaphore(1);
         perrosComiendo = 0;
         gatosComiendo = 0;
         perrosEsperando = 0;
@@ -43,13 +45,18 @@ public class Comedor {
                 && perrosEsperando == 0 && gatosEsperando == 0) {
             turnosPerros.release(maxTurno);
         }
+        //perrosEsperando++;
+        //System.out.println(Thread.currentThread().getName() + " está esperando su turno");
         modificacion.release();
 
         // En este momento habrá al menos un perro esperando (puede ser el que llega
         // primero)
+        // modificacion.acquire();
+        waiting.acquire();
         perrosEsperando++;
         System.out.println(Thread.currentThread().getName() + " está esperando su turno");
-
+        // modificacion.release();
+        waiting.release();
         /*
          * Si la condición del primer if se cumple, el hilo podrá obtener un permiso del
          * semáforo. De lo contrario, el hilo se bloqueará en este punto hasta que lo
@@ -70,12 +77,11 @@ public class Comedor {
         perrosEsperando--;
         // Simulo que el perro está comiendo
         System.out.println(Thread.currentThread().getName() + " está comiendo.");
-        Thread.sleep(500);
+        Thread.sleep(1500);
         modificacion.release();
 
         // El perro terminó de comer, modifico contadores encerrando con un semáforo
         // binario y libero 1 permiso del semáforo de platos
-
         modificacion.acquire();
         perrosComiendo--;
         cantPerrosComieron++;
@@ -107,7 +113,7 @@ public class Comedor {
                 // no hay ni perros ni gatos esperando, vuelvo el mundo al estado inicial
                 // Primero verifico cuántos perros comieron y, si es necesario, adquiero los
                 // permisos que se hayan dado de más al semáforo turnosPerros.
-                int permisosDeMas = cantPerrosComieron % maxTurno;
+                int permisosDeMas = maxTurno - cantPerrosComieron;
 
                 if (permisosDeMas != 0) {
                     turnosPerros.acquire(permisosDeMas);
@@ -118,12 +124,14 @@ public class Comedor {
             }
             cantPerrosComieron = 0; // Terminó la primer tanda
         } else {
-            if (this.soyElUltimo()) {
+            if (this.soyElUltimo()) { // Si soy el último de ambas especies
                 this.resetInicial();
                 System.out.println("Ya no hay perros ni gatos esperando por comer.");
                 System.out.println("Fin.");
             } else if (perrosEsperando == 0) {
-                int permisosDeMas = cantPerrosComieron % maxTurno;
+                // si soy el último de mi especie pero hay animales de otra especie esperando su
+                // turno
+                int permisosDeMas = maxTurno - cantPerrosComieron;
 
                 if (permisosDeMas != 0) {
                     turnosPerros.acquire(permisosDeMas);
@@ -135,16 +143,6 @@ public class Comedor {
         }
         modificacion.release();
 
-        // Verifico si no hay gatos ni perros esperando (xd)
-        /*
-         * if (perrosEsperando == 0) {
-         * if (gatosEsperando == 0) {
-         * } else {
-         * turnosGatos.release(gatosEsperando); // Esto pasaba si no hay perros
-         * esperando pero sí gatos
-         * }
-         * }
-         */
     }
 
     public void comerGatos() throws InterruptedException {
@@ -158,13 +156,19 @@ public class Comedor {
                 && perrosEsperando == 0 && gatosEsperando == 0) {
             turnosGatos.release(maxTurno);
         }
+        //gatosEsperando++;
+        //System.out.println(Thread.currentThread().getName() + " está esperando su turno");
         modificacion.release();
 
         // En este momento habrá al menos un perro esperando (puede ser el que llega
         // primero)
+        waiting.acquire();
+        // modificacion.acquire();
         gatosEsperando++;
         System.out.println(Thread.currentThread().getName() + " está esperando su turno");
-
+        // modificacion.release();
+        waiting.release();
+        
         /*
          * Si la condición del primer if se cumple, el hilo podrá obtener un permiso del
          * semáforo. De lo contrario, el hilo se bloqueará en este punto hasta que lo
@@ -185,7 +189,7 @@ public class Comedor {
         gatosEsperando--;
         // Simulo que el perro está comiendo
         System.out.println(Thread.currentThread().getName() + " está comiendo.");
-        Thread.sleep(500);
+        Thread.sleep(1500);
         modificacion.release();
 
         // El perro terminó de comer, modifico contadores encerrando con un semáforo
@@ -221,7 +225,7 @@ public class Comedor {
                 // no hay ni perros ni gatos esperando, vuelvo el mundo al estado inicial
                 // Primero verifico cuántos perros comieron y, si es necesario, adquiero los
                 // permisos que se hayan dado de más al semáforo turnosPerros.
-                int permisosDeMas = cantGatosComieron % maxTurno;
+                int permisosDeMas = maxTurno - cantGatosComieron;
 
                 if (permisosDeMas != 0) {
                     turnosGatos.acquire(permisosDeMas);
@@ -237,6 +241,8 @@ public class Comedor {
                 System.out.println("Ya no hay perros ni gatos esperando por comer.");
                 System.out.println("Fin.");
             } else if (gatosEsperando == 0) {
+                // si soy el último de mi especie pero hay animales de otra especie esperando su
+                // turno
                 int permisosDeMas = maxTurno - cantGatosComieron;
 
                 if (permisosDeMas != 0) {

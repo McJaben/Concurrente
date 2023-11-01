@@ -5,7 +5,7 @@ public class ControlComedor {
     public static void main(String[] args) {
         Comedor comedor = new Comedor(9);
         Perro[] arrPerros = new Perro[10];
-        Gato[] arrGatos = new Gato[6];
+        Gato[] arrGatos = new Gato[10];
         String[] nombresPerros = { "Perro 1", "Perro 2", "Perro 3", "Perro 4", "Perro 5", "Perro 6", "Perro 7",
                 "Perro 8", "Perro 9" , "Perro 10"};
         String[] nombresGatos = { "Gato 1", "Gato 2", "Gato 3", "Gato 4", "Gato 5", "Gato 6", "Gato 7", "Gato 8",

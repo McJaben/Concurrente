@@ -2,6 +2,10 @@ package practico5;
 
 import java.util.concurrent.Semaphore;
 
+/**
+ *
+ * @author benjamin.morales
+ */
 public class Comedor {
 
     // Ejercicio 3 del TP5 (y actividad obligatoria del 18/10/2023)
@@ -49,9 +53,6 @@ public class Comedor {
                 && perrosEsperando == 0 && gatosEsperando == 0) {
             turnosPerros.release(maxTurno);
         }
-        // perrosEsperando++;
-        // System.out.println(Thread.currentThread().getName() + " está esperando su
-        // turno");
         modificacion.release();
 
         // En este momento habrá al menos un perro esperando (puede ser el que llega
@@ -82,7 +83,7 @@ public class Comedor {
         perrosEsperando--;
         // Simulo que el perro está comiendo
         System.out.println(Thread.currentThread().getName() + " está comiendo.");
-        Thread.sleep(1500);
+        Thread.sleep(1000);
         modificacion.release();
 
         // El perro terminó de comer, modifico contadores encerrando con un semáforo
@@ -103,6 +104,7 @@ public class Comedor {
          */
         // Objetivo: tener alguna manera de determinar si soy o no el último
         modificacion.acquire();
+        Thread.sleep(500); // Como para darle un tiempo a que llegue algún otro animal
         if (cantPerrosComieron >= maxTurno) {
             if (gatosEsperando > 0) { // hay gatos esperando
                 turnosGatos.release(maxTurno);
@@ -167,12 +169,9 @@ public class Comedor {
                 && perrosEsperando == 0 && gatosEsperando == 0) {
             turnosGatos.release(maxTurno);
         }
-        // gatosEsperando++;
-        // System.out.println(Thread.currentThread().getName() + " está esperando su
-        // turno");
         modificacion.release();
 
-        // En este momento habrá al menos un perro esperando (puede ser el que llega
+        // En este momento habrá al menos un gato esperando (puede ser el que llega
         // primero)
         waiting.acquire();
         // modificacion.acquire();
@@ -201,7 +200,7 @@ public class Comedor {
         gatosEsperando--;
         // Simulo que el perro está comiendo
         System.out.println(Thread.currentThread().getName() + " está comiendo.");
-        Thread.sleep(1500);
+        Thread.sleep(1000);
         modificacion.release();
 
         // El perro terminó de comer, modifico contadores encerrando con un semáforo
@@ -222,6 +221,7 @@ public class Comedor {
          */
         // Objetivo: tener alguna manera de determinar si soy o no el último
         modificacion.acquire();
+        Thread.sleep(500); // Como para darle un tiempo a que llegue algún otro animal
         if (cantGatosComieron >= maxTurno) {
             if (perrosEsperando > 0) { // hay gatos esperando
                 turnosPerros.release(maxTurno);

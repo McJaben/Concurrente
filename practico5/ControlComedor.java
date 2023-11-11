@@ -1,5 +1,10 @@
 package practico5;
 
+/**
+ *
+ * @author benjamin.morales
+ */
+
 public class ControlComedor {
     // Ejercicio 3 del TP5
     public static void main(String[] args) {

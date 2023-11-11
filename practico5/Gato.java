@@ -1,5 +1,10 @@
 package practico5;
 
+/**
+ *
+ * @author benjamin.morales
+ */
+
 public class Gato implements Runnable {
     // Ejercicio 3 del TP5
     private Comedor comedor;

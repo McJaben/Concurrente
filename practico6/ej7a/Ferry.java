@@ -23,7 +23,7 @@ public class Ferry {
     }
 
     public synchronized void subirAuto() throws InterruptedException {
-        if (espaciosOcupados + tamAutos > espacios) {
+        if ((espaciosOcupados + tamAutos > espacios) || bajando) {
             sePuede = false;
         }
 
@@ -38,7 +38,8 @@ public class Ferry {
         }
 
         espaciosOcupados = espaciosOcupados + tamAutos;
-        System.out.println(Thread.currentThread().getName() + " subio al barco, espacios: " + espaciosOcupados);
+        System.out.println(Thread.currentThread().getName() + " subió al barco, espacios disponibles: "
+                + (espacios - espaciosOcupados));
 
         if (espaciosOcupados == espacios) {
             sePuede = false;
@@ -49,6 +50,9 @@ public class Ferry {
     }
 
     public synchronized void subirPasajero() throws InterruptedException {
+        if ((espaciosOcupados < espacios) && !bajando) {
+            sePuede = true;
+        }
         while (!sePuede) {
             this.wait();
             if (bajando) {
@@ -60,7 +64,8 @@ public class Ferry {
         }
 
         espaciosOcupados++;
-        System.out.println(Thread.currentThread().getName() + " subio al barco, espacios: " + espaciosOcupados);
+        System.out.println(Thread.currentThread().getName() + " subió al barco, espacios disponibles: "
+                + (espacios - espaciosOcupados));
         if (espaciosOcupados == espacios) {
             sePuede = false;
             this.enRecorrido();
@@ -92,9 +97,9 @@ public class Ferry {
     }
 
     public synchronized void enRecorrido() throws InterruptedException {
-        System.out.println("Inicia el recorrido");
+        System.out.println("Inicia el recorrido del ferry.");
         Thread.sleep(4000);
-        System.out.println("Finaliza el recorrido");
+        System.out.println("Finaliza el recorrido del ferry.");
 
         // System.out.println("Notificando");
         this.notifyAll();

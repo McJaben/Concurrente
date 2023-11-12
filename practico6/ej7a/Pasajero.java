@@ -26,7 +26,7 @@ public class Pasajero implements Runnable{
             System.out.println(Thread.currentThread().getName() + " intentando subir al barco");
             barco.subirPasajero();
             barco.bajarPasajero();
-            System.out.println(Thread.currentThread().getName() + " bajo del barco");
+            System.out.println(Thread.currentThread().getName() + " bajó del barco");
         } catch (InterruptedException ex) {
             Logger.getLogger(Auto.class.getName()).log(Level.SEVERE, null, ex);
         }

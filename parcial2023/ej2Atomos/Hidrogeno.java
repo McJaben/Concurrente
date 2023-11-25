@@ -1,6 +1,9 @@
 package parcial2023.ej2Atomos;
 
 public class Hidrogeno implements Runnable {
+    /*
+     * Representa un átomo de hidrógeno que formará una molécula de agua.
+     */
     private Espacio space;
 
     public Hidrogeno(Espacio espacio) {

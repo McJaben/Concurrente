@@ -3,12 +3,13 @@ package parcial2023.ej2Atomos;
 import java.util.concurrent.Semaphore;
 
 public class Espacio {
+    // Es el recurso compartido donde se generarán las moléculas de agua
     // Atributos
     private int maxAgua; // límite de moléculas de agua que caben en el recipiente
     private int cantAgua; // cantidad de moléculas de agua actual
-    private Semaphore olistos; // sem general, controla ejecución de átomos listos
-    private Semaphore hlistos; // sem general, controla ejecución de átomos listos
-    private Semaphore mutex; // sem binario para exclusión mutua
+    private Semaphore olistos; // sem general, controla ejecución de átomos oxigeno listos
+    private Semaphore hlistos; // sem general, controla ejecución de átomos hidrogeno listos
+    private Semaphore mutex; // semáforo binario para exclusión mutua
     private Semaphore formandoAgua; // sincroniza formación de agua y salida de los 3 átomos participantes
     private int cantOlistos; // cantidad de átomos de oxígeno listos actualmente
     private int cantHlistos; // cantidad de átomos de hidrógeno listos actualmente

@@ -1,6 +1,9 @@
 package parcial2023.ej2Atomos;
 
 public class Oxigeno implements Runnable {
+    /*
+     * Representa un átomo de oxígeno que formará una molécula de agua.
+     */
     private Espacio space;
 
     public Oxigeno(Espacio espacio) {
